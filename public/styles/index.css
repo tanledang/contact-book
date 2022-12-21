@@ -1,0 +1,16 @@
+body {
+    background: #407088; 
+}
+
+.contactCard {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    background: #ffcbcb;    
+}
+
+#add-contact {
+    background: #ffb5b5; 
+    margin: 5px;
+    padding: 5px;
+}
