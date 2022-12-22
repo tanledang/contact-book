@@ -35,6 +35,10 @@ app.delete('/delete-contact', (req, res) => {
   })
 })
 
+app.get('/contact-book', (req, res) => {
+  res.json(contactBook);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
