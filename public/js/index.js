@@ -1,3 +1,20 @@
+document.addEventListener('DOMContentLoaded', getAllContacts);
+
+async function getAllContacts() {
+    const response = await fetch('http://localhost:3000/contact-book');
+    const contacts = await response.json();
+    let htmlString = '';
+
+    for (let i = 0; i < contacts.length; i++) {
+        htmlString += `<div class="contactCard">
+            <p>${contacts[i].name}</p>
+            <p>${contacts[i].email}</p>
+            <button class="remove-contact" id=${i}> Remove </button>
+        </div>`
+    }
+
+    document.getElementById("contacts").innerHTML = htmlString;
+}
 
 function stringifyFormData(fd) {
     const data = {
