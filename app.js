@@ -3,12 +3,10 @@ const app = express()
 
 const pgp = require("pg-promise")();
 const db = pgp("postgres://postgres:password@localhost:5432/contactbook");
-
+const contactBook = [];
 
 
 const port = 3000
-let contactBook = [
-];
 
 
 app.set('view engine', 'ejs');
@@ -22,7 +20,11 @@ app.get('/', (req, res) => {
 
 app.post('/add-contact', (req, res) => {
   console.log(req.body);
-  contactBook.push(req.body);
+  db.none(`INSERT into contacts (name, email) VALUES ($1, $2);`, [
+    req.body.name,
+    req.body.email
+  ])
+  
   res.send({
     message: 'Contact added!',
     user: req.body
