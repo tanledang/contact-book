@@ -1,5 +1,11 @@
 const express = require('express')
 const app = express()
+
+const pgp = require("pg-promise")();
+const db = pgp("postgres://postgres:password@localhost:5432/contactbook");
+
+
+
 const port = 3000
 let contactBook = [
 ];
@@ -36,7 +42,7 @@ app.delete('/delete-contact', (req, res) => {
 })
 
 app.get('/contact-book', (req, res) => {
-  res.json(contactBook);
+  db.any("SELECT * from contacts").then((contacts) => res.json(contacts));
 })
 
 app.listen(port, () => {
