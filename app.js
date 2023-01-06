@@ -3,6 +3,11 @@ const app = express()
 
 const pgp = require("pg-promise")();
 const db = pgp("postgres://postgres:password@localhost:5432/contactbook");
+
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('postgres://postgres:password@localhost:5432/contactbook');
+const { Contact } = require('./models');
+
 const contactBook = [];
 
 
@@ -20,25 +25,21 @@ app.get('/', (req, res) => {
 
 app.post('/add-contact', (req, res) => {
   console.log(req.body);
-  db.none(`INSERT into contacts (name, email) VALUES ($1, $2);`, [
-    req.body.name,
-    req.body.email
-  ])
-  
-  res.send({
-    message: 'Contact added!',
-    user: req.body
-  })
+  Contact.create({ name: req.body.name, email: req.body.email}).then((result) => res.send(result))
 })
 
 app.delete('/delete-contact', (req, res) => {
   const id = req.body.id;
   console.log("We are deleting the contact with id: ", id)
-  db.result("DELETE from contacts WHERE id = $1", [id]).then((result) => res.send(result));
+  Contact.destroy({
+    where: {
+      id: req.body.id
+    }
+  }).then(res.status(200).send({message: `Contact with ${id} delted`}));
 })
 
 app.get('/contact-book', (req, res) => {
-  db.any("SELECT * from contacts").then((contacts) => res.json(contacts));
+  Contact.findAll().then(results => res.send(results));
 })
 
 app.listen(port, () => {
