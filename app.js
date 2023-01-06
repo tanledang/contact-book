@@ -33,14 +33,8 @@ app.post('/add-contact', (req, res) => {
 
 app.delete('/delete-contact', (req, res) => {
   const id = req.body.id;
-  const userToDelete = contactBook[id]
-  console.log("User to delete:", userToDelete)
-  contactBook.splice(id, 1);
-  console.log(contactBook)
-  res.send({
-    message: "User succesfully deleted",
-    user: userToDelete
-  })
+  console.log("We are deleting the contact with id: ", id)
+  db.result("DELETE from contacts WHERE id = $1", [id]).then((result) => res.send(result));
 })
 
 app.get('/contact-book', (req, res) => {

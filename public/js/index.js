@@ -9,7 +9,7 @@ async function getAllContacts() {
         htmlString += `<div class="contactCard">
             <p>${contacts[i].name}</p>
             <p>${contacts[i].email}</p>
-            <button class="remove-contact" id=${i}> Remove </button>
+            <button class="remove-contact" id=${contacts[i].id}> Remove </button>
         </div>`
     }
 
@@ -28,7 +28,6 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data);
-    console.log(stringified);
     const response = await fetch('http://localhost:3000/add-contact', {
         method: 'POST',
         headers: {
@@ -53,7 +52,6 @@ form.addEventListener("submit", handleSubmit)
 
 const handleDelete = async (e) => {
     if (e.target.className.includes("remove-contact")) {
-        console.log(e.target.id);
         const response = await fetch('http://localhost:3000/delete-contact', {
             method: 'DELETE',
             headers: {
