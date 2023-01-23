@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', getAllContacts);
 
 async function getAllContacts() {
-    const response = await fetch('http://localhost:3000/contact-book');
+    const response = await fetch('/contact-book');
     const contacts = await response.json();
     let htmlString = '';
 
@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data);
-    const response = await fetch('http://localhost:3000/add-contact', {
+    const response = await fetch('/add-contact', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ form.addEventListener("submit", handleSubmit)
 
 const handleDelete = async (e) => {
     if (e.target.className.includes("remove-contact")) {
-        const response = await fetch('http://localhost:3000/delete-contact', {
+        const response = await fetch('/delete-contact', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
