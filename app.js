@@ -1,11 +1,9 @@
 const express = require('express')
 const app = express()
 
-const pgp = require("pg-promise")();
-const db = pgp("postgres://postgres:password@localhost:5432/contactbook");
 
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('postgres://postgres:password@localhost:5432/contactbook');
+const sequelize = new Sequelize('postgres://contact_book_r445_user:sOqhbXceoHqDX7S34uW2OM7Po6UEY6wm@dpg-cf6sft9gp3jnt5g6h690-a/contact_book_r445');
 const { Contact } = require('./models');
 
 const contactBook = [];

@@ -14,10 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "password",
-    "database": "contactbook",
-    "host": "localhost",
+    "username": "contact_book_r445_user",
+    "password": "sOqhbXceoHqDX7S34uW2OM7Po6UEY6wm",
+    "database": "contact_book_r445",
+    "host": "dpg-cf6sft9gp3jnt5g6h690-a",
     "dialect": "postgres"
   }
 }
