@@ -9,17 +9,12 @@ const { Contact } = require('./models');
 const contactBook = [];
 
 
-const port = 3000
+const port = 3001
 
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.static('public'))
-
-
-app.get('/', (req, res) => {
-  res.render('index', { contactBook });
-})
 
 app.post('/add-contact', (req, res) => {
   console.log(req.body);
